@@ -22,9 +22,8 @@ public class CarController : MonoBehaviour
     [SerializeField] float brakePower;
     [SerializeField] float slipAngle;
 
-    [SerializeField] AudioSource MotorSound;
-    [SerializeField] AudioSource BrakeSound;
-    [SerializeField] AudioSource CarHorn;
+    [SerializeField] AudioManager audioManager;
+    [SerializeField] AudioSource HornSource;
 
     float Speed;
 
@@ -55,12 +54,12 @@ public class CarController : MonoBehaviour
 
         if (isBraked)
         {
-            PlayBrakeSound();
+            audioManager.PlaySFX("BrakeSound");
             ApplyBrakeParticles();
         }
         else
         {
-            PlayMotorSound();
+            audioManager.PlaySFX("MotorSound");
             StopBrakeParticles();
         }
 
@@ -105,7 +104,7 @@ public class CarController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            PlayCarHorn();
+            CarHorn(); 
         }
     }
 
@@ -189,28 +188,9 @@ public class CarController : MonoBehaviour
         }
     }
 
-    // Playing Sound Effects
-    void PlayBrakeSound()
+    void CarHorn()
     {
-        if (!BrakeSound.isPlaying)
-        {
-            BrakeSound.Play();
-            MotorSound.Stop();
-        }
-    }
-
-    void PlayMotorSound()
-    {
-        if (!MotorSound.isPlaying)
-        {
-            MotorSound.Play();
-            BrakeSound.Stop();
-        }
-    }
-
-    void PlayCarHorn()
-    {
-        CarHorn.Play();
+        HornSource.Play();
     }
 }
 

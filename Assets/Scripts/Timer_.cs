@@ -1,13 +1,11 @@
 using UnityEngine;
 using TMPro;
 
-public class Timer_ : MonoBehaviour
+public class Timer_ : Subject
 {
 
     [SerializeField] TextMeshProUGUI timerText;
     public float ReminingTime;
-    [SerializeField] GameObject ExitPanel;
-    [SerializeField] GameObject Gear_Controller;
     [SerializeField]CarController carController;
     // Update is called once per frame
     void Update()
@@ -16,9 +14,10 @@ public class Timer_ : MonoBehaviour
 
         else if (ReminingTime < 0)
         {
-            ReminingTime = 0; ExitPanel.SetActive(true);
+            ReminingTime = 0;
+            NotifyObserver(PlayerAction.ExitPanel_true);
             carController.enabled = false;
-            Gear_Controller.SetActive(false);
+            NotifyObserver(PlayerAction.Gear_Controller_false);
         }   
        
         int minutes = Mathf.FloorToInt(ReminingTime / 60);

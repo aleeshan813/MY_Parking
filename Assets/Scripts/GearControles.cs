@@ -1,11 +1,10 @@
 using UnityEngine;
 
-public class GearControles : MonoBehaviour
+public class GearControles : Subject
 {
     [SerializeField] ParkingBrake parkingBrake;
     [SerializeField] CarController carController;
 
-    [SerializeField] AudioSource TireSource;
     [SerializeField] AudioSource DriveSourc;
 
 
@@ -21,7 +20,6 @@ public class GearControles : MonoBehaviour
         isBraking = false;
         ReleaseBrake();
         carController.enabled = true;
-        TireSource.enabled = true;
         DriveSourc.enabled = true;
     }
 
@@ -29,9 +27,7 @@ public class GearControles : MonoBehaviour
    public void ApplyParkingBrake()
     {
         carController.enabled = false;
-        TireSource.enabled = false;
         DriveSourc.enabled = false;
-
         isDriving = false;
         isBraking = true;
         parkingBrake.WheelFR.brakeTorque = brakePower;

@@ -1,15 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class CountDown : MonoBehaviour
+public class CountDown : Subject
 {
     public int CountDownTime;
 
     [SerializeField] TextMeshProUGUI CountDownDisplay; // Changed TextMeshPro to TextMeshProUGUI
-    [SerializeField] GameObject Timer;
-    [SerializeField] GameObject gear_Controles;
     [SerializeField] AudioSource CountDown_audio;
 
     private void Start()
@@ -27,9 +24,9 @@ public class CountDown : MonoBehaviour
             CountDownTime--;
         }
 
-        gear_Controles.SetActive(true);
+        NotifyObserver(PlayerAction.Gear_Controller_true);
         CountDownDisplay.text = "GO!";
-        Timer.SetActive(true);
+        NotifyObserver(PlayerAction.Timer);
         
         yield return new WaitForSeconds(1f);
 

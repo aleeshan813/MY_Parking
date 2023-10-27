@@ -1,9 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : Subject
 {
-    [SerializeField] GameObject PausPanel;
     bool continueing = false;
    /* [SerializeField] GameObject VolumePanel;*/
     
@@ -46,14 +45,10 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        PausPanel.SetActive(!PausPanel.activeSelf);
-        {
-            Time.timeScale = 0f;
-        }
+        NotifyObserver(PlayerAction.PausePanel_true);
     }
     public void Continue()
     {
-        PausPanel.SetActive(false);
-        Time.timeScale = 1.0f;
+        NotifyObserver(PlayerAction.PausePanel_false);
     }
 }
